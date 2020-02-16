@@ -1,13 +1,33 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import "jquery";
-import "bootstrap";
 import ViewerPage from "./ViewerPage";
-// import * as serviceWorker from "./serviceWorker";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import EditorPage from "./EditorPage";
 
-ReactDOM.render(<ViewerPage />, document.getElementById("root"));
-
+function App() {
+  return (
+    <div>
+      <Switch>
+        <Route path="/view">
+          <ViewerPage />
+        </Route>
+        <Route path="/editor">
+          <EditorPage />
+        </Route>
+        <Route path="/">
+          <ViewerPage />
+        </Route>
+      </Switch>
+    </div>
+  );
+}
+ReactDOM.render(
+  <Router>
+    <App />
+  </Router>,
+  document.getElementById("root")
+);
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
