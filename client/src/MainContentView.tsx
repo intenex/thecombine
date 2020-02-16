@@ -8,7 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Markup } from "interweave";
 import { BootstrapTooltip, HtmlTooltip } from "./hocs/util";
-import { Article } from "./EditorPage";
+import { Article } from "./ArticlePage";
 import classNames from "classnames";
 
 interface Props {

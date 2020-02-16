@@ -3,12 +3,7 @@ import ReactQuill, { Quill } from "react-quill";
 import Interweave from "interweave";
 import "./App.css";
 import "react-quill/dist/quill.snow.css";
-
-interface Article {
-  id: Number;
-  title: string;
-  body: { content: string };
-}
+import { Article } from "./ArticlePage";
 
 class App extends React.Component {
   // Initialize state

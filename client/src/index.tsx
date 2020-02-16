@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./style/index.scss";
-import ViewerPage from "./ViewerPage";
+import ArticlePage from "./ArticlePage";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import EditorPage from "./EditorPage";
 
@@ -9,7 +9,7 @@ function App() {
   return (
     <div>
       <Switch>
-        <Route path="/view/:articleId" component={ViewerPage} />
+        <Route path="/view/:articleId" component={ArticlePage} />
         <Route path="/editor">
           <EditorPage />
         </Route>

@@ -1,6 +1,6 @@
 import React from "react";
-import "./App.css";
 import { Link, withRouter, RouteComponentProps } from "react-router-dom";
+import "./App.css";
 
 interface Props extends RouteComponentProps<OptionalArticleParams> {
   onSubmit?: () => unknown;
@@ -27,7 +27,6 @@ class Header extends React.Component<Props> {
       match: { params }
     } = this.props;
     const { pathname } = this.props.location;
-    console.log(this.props.location.pathname);
     const linkTo = pathname === "/editor" ? "/viewer" : "/editor";
     const editor = pathname === "/editor";
     let maybeEditAndDeleteButtons = <></>;

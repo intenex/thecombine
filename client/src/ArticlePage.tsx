@@ -11,16 +11,16 @@ export interface Article {
   body: { content: string };
 }
 
-interface Props extends RouteComponentProps<ArticleParams> {}
-
 type ArticleParams = { articleId: string };
+
+interface Props extends RouteComponentProps<ArticleParams> {}
 
 interface State {
   articles: Article[];
   article?: Article;
 }
 
-export default class ViewerPage extends React.Component<Props, State> {
+export default class ArticlePage extends React.Component<Props, State> {
   state: State = {
     articles: []
   };
@@ -45,7 +45,6 @@ export default class ViewerPage extends React.Component<Props, State> {
   };
 
   render() {
-    console.log("loaded");
     return (
       <>
         <Header />

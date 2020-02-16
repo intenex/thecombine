@@ -1,18 +1,13 @@
 import React from "react";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 import ReactQuill, { Quill } from "react-quill";
 import Interweave from "interweave";
 import "./App.css";
 import "react-quill/dist/quill.snow.css";
 import Header from "./Header";
-import { withRouter, RouteComponentProps } from "react-router-dom";
+import { Article } from "./ArticlePage";
 
-export interface Article {
-  id: Number;
-  title: string;
-  body: { content: string };
-}
-
-interface Props extends RouteComponentProps<any> {}
+interface Props extends RouteComponentProps {}
 
 interface State {
   articles: Article[];
@@ -21,16 +16,11 @@ interface State {
 }
 
 class EditorPage extends React.Component<Props> {
-  // Initialize state
   state: State = {
     articles: [],
     title: "",
     body: ""
   };
-
-  constructor(props: Props) {
-    super(props);
-  }
 
   // Fetch articles after first mount
   componentDidMount() {
@@ -44,7 +34,6 @@ class EditorPage extends React.Component<Props> {
 
   handleBodyChange = (value: string) => {
     this.setState({ body: value });
-    console.log(value);
   };
 
   handleArticleSubmit = async () => {
@@ -97,7 +86,6 @@ class EditorPage extends React.Component<Props> {
               </ul>
             </div>
           ) : (
-            // Render a helpful message otherwise
             <div>
               <h1>No articles :(</h1>
             </div>

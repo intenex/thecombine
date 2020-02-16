@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import List from "@material-ui/core/List";
 import ListItemView from "./ListItemView";
-import { Article } from "./ViewerPage";
+import { Article } from "./ArticlePage";
 
 interface Props {
   articles: Article[];
