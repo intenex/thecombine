@@ -21,7 +21,10 @@ class App extends React.Component {
     // get articles and store them in state
     fetch("/api/articles")
       .then(res => res.json())
-      .then(articles => this.setState({ articles }));
+      .then(articles => {
+        this.setState({ articles });
+        console.log(articles);
+      });
   };
 
   render() {
@@ -41,7 +44,7 @@ class App extends React.Component {
                 change positions in the array.
               */}
               {articles.map((article, index) => (
-                <li key={index}>{article}</li>
+                <li key={index}>{article.title}</li>
               ))}
             </ul>
           </div>
