@@ -10,11 +10,12 @@ export default class ViewerPage extends React.Component {
   }
 
   getArticles() {
-    return [
-      "Getting Started",
-      "Introduction to Ruby",
-      "Enumerables and Debugging"
-    ];
+    const data = fetch("/api/articles")
+      .then(res => res.json())
+      .then(articles => {
+        this.setState({ articles });
+      });
+    console.log(data);
   }
 
   render() {
@@ -23,7 +24,7 @@ export default class ViewerPage extends React.Component {
         <Header />
         <div className="row">
           <div className="col-2 bg-light">
-            <ListView articles={getArticles()} />
+            <ListView articles={this.getArticles()} />
           </div>
           <div className="col-8 bg-secondary">main content</div>
           <div className="col-2 bg-success">space</div>

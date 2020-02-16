@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/List";
+import ListItemView from "./ListItemView";
 
 export default class ListView extends React.Component {
   constructor(props) {
@@ -12,7 +12,7 @@ export default class ListView extends React.Component {
     return (
       <List>
         {articles.map(article => {
-          <ListItem>{article}</ListItem>;
+          return <ListItemView article={article} />;
         })}
       </List>
     );
