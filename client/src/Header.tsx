@@ -20,6 +20,7 @@ class Header extends React.Component<Props> {
               <button
                 type="button"
                 className="btn btn-primary contributeButton"
+                onClick={this.props.onSubmit}
               >
                 Submit your change
               </button>
@@ -37,7 +38,7 @@ class Header extends React.Component<Props> {
           <div className="col-2">
             <img
               className="topUserImage mr-3"
-              src="assets/userbubble.png"
+              src="assets/mai-headshot.png"
             ></img>
           </div>
         </div>

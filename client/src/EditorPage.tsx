@@ -4,20 +4,33 @@ import Interweave from "interweave";
 import "./App.css";
 import "react-quill/dist/quill.snow.css";
 import Header from "./Header";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 
-interface Article {
+export interface Article {
   id: Number;
   title: string;
   body: { content: string };
 }
 
-export default class EditorPage extends React.Component {
+interface Props extends RouteComponentProps<any> {}
+
+interface State {
+  articles: Article[];
+  title: string;
+  body: string;
+}
+
+class EditorPage extends React.Component<Props> {
   // Initialize state
-  state: { articles: Article[]; title: string; body: string } = {
+  state: State = {
     articles: [],
     title: "",
     body: ""
   };
+
+  constructor(props: Props) {
+    super(props);
+  }
 
   // Fetch articles after first mount
   componentDidMount() {
@@ -42,7 +55,9 @@ export default class EditorPage extends React.Component {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(postBody)
     });
+    this.setState({ title: "", body: "" });
     this.getArticles();
+    this.props.history.push("/home");
   };
 
   getArticles = () => {
@@ -60,10 +75,10 @@ export default class EditorPage extends React.Component {
 
     return (
       <>
-        {/* <div className="App"> */}
-        <Header />
-        {/* Render the articles if we have them */}
-        {/* {articles.length ? (
+        <div className="App">
+          <Header onSubmit={this.handleArticleSubmit} />
+          {/* Render the articles if we have them */}
+          {articles.length ? (
             <div>
               <h1>Articles</h1>
               <ul className="articles">
@@ -80,13 +95,14 @@ export default class EditorPage extends React.Component {
                   </>
                 ))}
               </ul>
-            </div> */}
-        {/* ) : ( // Render a helpful message otherwise
-          <div>
-            <h1>No articles :(</h1>
-          </div>
+            </div>
+          ) : (
+            // Render a helpful message otherwise
+            <div>
+              <h1>No articles :(</h1>
+            </div>
           )}
-        </div> */}
+        </div>
         <div className="container">
           <div className="row">
             <div className="col-2"></div>
@@ -104,7 +120,6 @@ export default class EditorPage extends React.Component {
                 className="quillEditor"
                 value={this.state.body}
                 onChange={this.handleBodyChange}
-                placeholder="Tell us what you know"
               />
             </div>
             <div className="col-2"></div>
@@ -114,3 +129,5 @@ export default class EditorPage extends React.Component {
     );
   }
 }
+
+export default withRouter(EditorPage);
