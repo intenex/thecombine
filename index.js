@@ -10,9 +10,9 @@ const app = express();
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, "client/public")));
 // maybe use these unclear
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(cors());
 
 // Put all API endpoints under '/api'
 app.get("/api/passwords", (req, res) => {
