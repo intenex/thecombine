@@ -17,6 +17,7 @@
     "@types/react-router-dom": "^5.1.3",
     "bootstrap": "^4.4.1",
     "interweave": "^12.2.1",
+    "jquery": "^3.4.1",
     "quill": "^1.3.7",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
