@@ -1,12 +1,13 @@
 import React from "react";
-import "./App.css";
 import ReactQuill, { Quill } from "react-quill";
+import Interweave from "interweave";
+import "./App.css";
 import "react-quill/dist/quill.snow.css";
 
 interface Article {
   id: Number;
   title: string;
-  body: JSON;
+  body: { content: string };
 }
 
 class App extends React.Component {
@@ -65,7 +66,16 @@ class App extends React.Component {
               <h1>Articles</h1>
               <ul className="articles">
                 {articles.map((article: Article, index) => (
-                  <li key={index}>{article.title}</li>
+                  <>
+                    <ul>
+                      <li key={index}>{article.title}</li>
+                      {article.body ? (
+                        <Interweave content={article.body.content} />
+                      ) : (
+                        "Nothing here"
+                      )}
+                    </ul>
+                  </>
                 ))}
               </ul>
             </div>
