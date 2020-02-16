@@ -6,15 +6,22 @@ import {
   faEye,
   faComment
 } from "@fortawesome/free-solid-svg-icons";
+import { Markup } from "interweave";
 import { BootstrapTooltip, HtmlTooltip } from "./hocs/util";
+import { Article } from "./ViewerPage";
 
-export default class MainContentView extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+interface Props {
+  article?: Article;
+}
 
+export default class MainContentView extends React.Component<Props> {
   render() {
     const { article } = this.props;
+
+    if (!article) {
+      return <div>Sorry, we couldn't find this article...</div>;
+    }
+
     return (
       <div className="p-5 container">
         <div className="row">
@@ -51,20 +58,11 @@ export default class MainContentView extends React.Component {
               }
             >
               <p data-tip="hello world" className="mt-5">
-                Being a developer isn't just hacking away into the wee hours of
-                the morning or debugging a new feature. In order to become a
-                well-rounded developer we should also understand what tools we
-                need and a minimum understanding of how they work. This includes
-                setting up our computers for development. Here at App Academy we
-                work with a Ruby on Rails, JavaScript, React, Redux, and
-                PostgresSQL stack. A stack is simply a collection of software
-                and hardware used in development of an application. For our
-                specific purposes we are using Ruby on Rails on the
-                backend/server, PostgresSQL to house our database, and
-                JavaScript + React + Redux for frontend rendering and logic. As
-                we progress through the course you will be prompted to complete
-                a few installation and configuration steps to get your personal
-                machine ready for the next phase.
+                {article.body ? (
+                  <Markup content={article.body.content} />
+                ) : (
+                  "Nothing here"
+                )}
               </p>
             </HtmlTooltip>
           </div>

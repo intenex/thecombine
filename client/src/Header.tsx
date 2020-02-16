@@ -1,12 +1,10 @@
 import React from "react";
 import "./App.css";
-import { Link, withRouter } from "react-router-dom";
+import { Link, withRouter, RouteComponentProps } from "react-router-dom";
 
-class Header extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+interface Props extends RouteComponentProps {}
 
+class Header extends React.Component<Props> {
   render() {
     const linkTo =
       this.props.location.pathname === "/editor" ? "/viewer" : "/editor";

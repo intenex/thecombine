@@ -2,11 +2,13 @@ import React from "react";
 import "./App.css";
 import List from "@material-ui/core/List";
 import ListItemView from "./ListItemView";
+import { Article } from "./ViewerPage";
 
-export default class ListView extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+interface Props {
+  articles: Article[];
+}
+
+export default class ListView extends React.Component<Props> {
   render() {
     const { articles } = this.props;
     return (

@@ -1,12 +1,14 @@
 import React from "react";
 import "./App.css";
 import ListItemText from "@material-ui/core/ListItemText";
-import ListItem from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import { Article } from "./ViewerPage";
 
-export default class ListItemView extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+interface Props {
+  article: Article;
+}
+
+export default class ListItemView extends React.Component<Props> {
   render() {
     const { article } = this.props;
     return (

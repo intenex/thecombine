@@ -9,15 +9,13 @@ function App() {
   return (
     <div>
       <Switch>
-        <Route path="/view">
-          <ViewerPage />
-        </Route>
+        <Route path="/view/:articleId" component={ViewerPage} />
         <Route path="/editor">
           <EditorPage />
         </Route>
-        <Route path="/">
+        {/* <Route path="/">
           <ViewerPage />
-        </Route>
+        </Route> */}
       </Switch>
     </div>
   );
