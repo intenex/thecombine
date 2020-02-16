@@ -2,7 +2,9 @@ import React from "react";
 import "./App.css";
 import { Link, withRouter, RouteComponentProps } from "react-router-dom";
 
-interface Props extends RouteComponentProps {}
+interface Props extends RouteComponentProps {
+  onSubmit?: () => unknown;
+}
 
 class Header extends React.Component<Props> {
   render() {

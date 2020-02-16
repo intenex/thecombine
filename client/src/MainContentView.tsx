@@ -60,11 +60,17 @@ export default class MainContentView extends React.Component<Props> {
             <h1 className="font-weight-bold mt-1">{article.title}</h1>
             <div className="d-flex flex-row justify-content-between">
               <div>
-                <img className="collaborators" src="assets/mai-headshot.png" />
-                <img className="collaborators overlap" src="assets/asher.png" />
+                <img
+                  className="collaborators"
+                  src="../assets/mai-headshot.png"
+                />
                 <img
                   className="collaborators overlap"
-                  src="assets/ben-headshot.png"
+                  src="../assets/asher.png"
+                />
+                <img
+                  className="collaborators overlap"
+                  src="../assets/ben-headshot.png"
                 />
               </div>
               <div className="d-flex flex-row align-items-center reaction">
