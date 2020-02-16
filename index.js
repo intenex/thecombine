@@ -1,7 +1,6 @@
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
-const generatePassword = require("password-generator");
 const cors = require("cors");
 const { pool } = require("./config");
 
@@ -15,20 +14,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 // Put all API endpoints under '/api'
-app.get("/api/passwords", (req, res) => {
-  const count = 5;
-
-  // Generate some passwords
-  const passwords = Array.from(Array(count).keys()).map(i =>
-    generatePassword(12, false)
-  );
-
-  // Return them as json
-  res.json(passwords);
-
-  console.log(`Sent ${count} passwords`);
-});
-
 app.get("/api/articles", (req, res) => {
   pool.query("SELECT * FROM articles", (err, results) => {
     if (err) {
@@ -63,4 +48,4 @@ app.get("*", (req, res) => {
 const port = process.env.PORT || 5000;
 app.listen(port);
 
-console.log(`Password generator listening on ${port}`);
+console.log(`API server listening on ${port}`);

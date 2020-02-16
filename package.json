@@ -6,12 +6,18 @@
   "author": "Ben Yu <intenex@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@types/jest": "^25.1.2",
+    "@types/node": "^13.7.1",
+    "@types/react": "^16.9.19",
+    "@types/react-dom": "^16.9.5",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "password-generator": "^2.2.3",
-    "pg": "^7.18.1"
+    "pg": "^7.18.1",
+    "quill": "^1.3.7",
+    "react-quill": "^1.3.3",
+    "typescript": "^3.7.5"
   },
   "scripts": {
     "start": "node index.js",
