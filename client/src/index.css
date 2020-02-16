@@ -22,7 +22,7 @@ code {
   margin: auto;
 }
 
-.userImage {
+.topUserImage {
   margin: 5px;
   height: 40px;
   width: 40px;
@@ -34,4 +34,30 @@ code {
   line-height: 18px;
   background-color: #3a95ff;
   width: 120px;
+}
+
+.contentViewContainer {
+  width: 600px;
+}
+
+.reaction {
+  color: #5a5858;
+}
+
+.reactionNumber {
+  font-size: 14px;
+}
+
+.lastEdited {
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 14px;
+}
+
+.overlap {
+  margin-left: -10px;
+}
+
+.collaborators {
+  height: 40px;
+  width: 40px;
 }

@@ -19,7 +19,10 @@ export default class Header extends React.Component {
             </button>
           </div>
           <div className="col-2">
-            <img className="userImage mr-3" src="assets/userbubble.png"></img>
+            <img
+              className="topUserImage mr-3"
+              src="assets/userbubble.png"
+            ></img>
           </div>
         </div>
       </div>

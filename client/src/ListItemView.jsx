@@ -11,7 +11,7 @@ export default class ListItemView extends React.Component {
     const { article } = this.props;
     return (
       <ListItem button>
-        <ListItemText className="ml-3">{article}</ListItemText>
+        <ListItemText className="ml-3">{article.title}</ListItemText>
       </ListItem>
     );
   }
