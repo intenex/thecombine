@@ -56,42 +56,46 @@ export default class MainContentView extends React.Component<Props> {
         <div className="row">
           <div className="col-2"></div>
           <div className="col-8">
-            <h3 className="mb-1">Intro to Programming</h3>
+            <h3 className="mb-1 category">Intro to Programming</h3>
             <h1 className="font-weight-bold mt-1">{article.title}</h1>
             <div className="d-flex flex-row justify-content-between">
               <div>
                 <img
-                  className="collaborators"
+                  className="MainContentView__collaborators"
                   src="../assets/mai-headshot.png"
                 />
                 <img
-                  className="collaborators overlap"
+                  className="MainContentView__collaborators MainContentView__overlap"
                   src="../assets/asher.png"
                 />
                 <img
-                  className="collaborators overlap"
+                  className="MainContentView__collaborators MainContentView__overlap"
                   src="../assets/ben-headshot.png"
                 />
               </div>
-              <div className="d-flex flex-row align-items-center reaction">
+              <div className="d-flex flex-row align-items-center MainContentView__reaction">
                 <FontAwesomeIcon icon={faEye} className="mr-1" />
-                <div className="mr-3 reactionNumber">1496</div>
+                <div className="mr-3 MainContentView__reactionNumber">1496</div>
                 <FontAwesomeIcon icon={faComment} className="mr-1" />
-                <div className="mr-3 reactionNumber">56</div>
-
-                <div className="mr-3 reactionNumber">234</div>
+                <div className="mr-3 MainContentView__reactionNumber">56</div>
+                <FontAwesomeIcon icon={faThumbsUp} className="mr-1" />
+                <div className="mr-3 MainContentView__reactionNumber">234</div>
                 <FontAwesomeIcon icon={faThumbsDown} className="mr-1" />
-                <div className="reactionNumber">34</div>
+                <div className="MainContentView__reactionNumber">34</div>
               </div>
             </div>
-            <p className="mt-2 lastEdited">Last edited: 02/14/2020</p>
-            <BootstrapTooltip
+            <p className="mt-2 MainContentView__lastEdited">
+              Last edited: 02/14/2020
+            </p>
+
+            {/* <BootstrapTooltip
               title={
                 <>
+                  <a href="http://iamili.com">click me</a>
                   <FontAwesomeIcon
                     icon={faThumbsUp}
                     className={classNames("ml-2 mr-2", {
-                      upvoted: upvote
+                      MainContentView__upvoted: upvote
                     })}
                     size="2x"
                     onClick={this.toggleUpVote}
@@ -99,7 +103,7 @@ export default class MainContentView extends React.Component<Props> {
                   <FontAwesomeIcon
                     icon={faThumbsDown}
                     className={classNames("mr-2", {
-                      downvoted: downvote
+                      MainContentView__downvoted: downvote
                     })}
                     size="2x"
                     onClick={this.toggleDownVote}
@@ -125,11 +129,11 @@ export default class MainContentView extends React.Component<Props> {
                   "Nothing here"
                 )}
               </p>
-            </BootstrapTooltip>
+            </BootstrapTooltip> */}
             <FontAwesomeIcon
               icon={faThumbsDown}
               className={classNames("mr-2", {
-                downvoted: downvote
+                MainContentView__downvoted: downvote
               })}
               size="2x"
               onClick={this.toggleDownVote}

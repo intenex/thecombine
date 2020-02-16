@@ -1,0 +1,16 @@
+.EditorPage__quillEditor {
+  width: 100%;
+  height: 500px;
+}
+
+.EditorPage__titleInput {
+  height: 60px;
+  font-size: 40px;
+  border-style: none;
+  font-family: Georgia, Times, "Times New Roman", serif;
+}
+
+.EditorPage__titleInput::placeholder {
+  font-size: 40px;
+  color: #aca9a9;
+}

@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+import "./style/index.scss";
 import ViewerPage from "./ViewerPage";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import EditorPage from "./EditorPage";

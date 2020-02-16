@@ -112,12 +112,12 @@ class EditorPage extends React.Component<Props> {
                   type="text"
                   value={this.state.title}
                   onChange={this.handleTitleChange}
-                  className="titleInput "
+                  className="EditorPage__titleInput"
                   placeholder="Type your title"
                 />
               </div>
               <ReactQuill
-                className="quillEditor"
+                className="EditorPage__quillEditor"
                 value={this.state.body}
                 onChange={this.handleBodyChange}
               />
