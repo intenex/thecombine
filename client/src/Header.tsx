@@ -24,38 +24,36 @@ class Header extends React.Component<Props> {
 
   render() {
     const {
-      match: { params }
+      match: {
+        params: { articleId }
+      }
     } = this.props;
     const { pathname } = this.props.location;
-    const linkTo = pathname === "/editor" ? "/viewer" : "/editor";
-    const editor = pathname === "/editor";
+    const linkTo = pathname.includes("/editor") ? "/viewer" : "/editor";
+    const editor = pathname.includes("edit");
     let maybeEditAndDeleteButtons = <></>;
-    if (params.articleId) {
-      if (pathname === `/view/${params.articleId}`) {
-        // then we should show edit and delete buttons
-        const editPage = pathname + "/edit"; // create this route later to edit
-        maybeEditAndDeleteButtons = (
-          <>
-            <Link to={editPage}>
-              {" "}
-              <button
-                type="button"
-                className="btn btn-primary contributeButton"
-              >
-                Edit
-              </button>
-            </Link>
-            <button
-              type="button"
-              className="btn btn-primary contributeButton"
-              onClick={this.handleDelete}
-            >
-              Delete
+    if (articleId && pathname.includes(`/view/${articleId}`) && !editor) {
+      // then we should show edit and delete buttons
+      const editPage = `/view/${articleId}/edit`;
+      maybeEditAndDeleteButtons = (
+        <>
+          <Link to={editPage}>
+            {" "}
+            <button type="button" className="btn btn-primary contributeButton">
+              Edit
             </button>
-          </>
-        );
-      }
+          </Link>
+          <button
+            type="button"
+            className="btn btn-primary contributeButton"
+            onClick={this.handleDelete}
+          >
+            Delete
+          </button>
+        </>
+      );
     }
+
     return (
       <div className="Header__header">
         <div className="row">

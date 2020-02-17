@@ -1,28 +1,29 @@
 import React from "react";
-import { withRouter, RouteComponentProps } from "react-router-dom";
+import { RouteComponentProps } from "react-router-dom";
+import Header from "./Header";
 import ReactQuill, { Quill } from "react-quill";
-import Interweave from "interweave";
+import { Markup } from "interweave";
 import "./App.css";
 import "react-quill/dist/quill.snow.css";
-import Header from "./Header";
-import { getArticles, postArticle } from "./functions/articleFunctions";
-import { Article, NewArticle } from "./types/articleTypes";
+import { getArticles, updateArticle } from "./functions/articleFunctions";
+import { Article } from "./types/articleTypes";
 
-interface Props extends RouteComponentProps {}
+type ArticleParams = { articleId: string };
+
+interface Props extends RouteComponentProps<ArticleParams> {}
 
 interface State {
   articles: Article[];
+  article?: Article;
   title: string;
   body: string;
-  loading: boolean;
 }
 
-class EditorPage extends React.Component<Props> {
+export default class EditArticlePage extends React.Component<Props> {
   state: State = {
     articles: [],
     title: "",
-    body: "",
-    loading: false
+    body: ""
   };
 
   componentDidMount() {
@@ -30,9 +31,24 @@ class EditorPage extends React.Component<Props> {
   }
 
   loadArticles = () => {
+    const {
+      match: { params }
+    } = this.props;
     this.setState({ loading: true });
     getArticles().then(articles => {
-      this.setState({ articles });
+      const selectedArticle = articles.find(
+        article => article.id === parseInt(params.articleId)
+      );
+      this.setState({
+        articles,
+        article: selectedArticle,
+        title: selectedArticle ? selectedArticle.title : "",
+        body:
+          selectedArticle && selectedArticle.body
+            ? selectedArticle.body.content
+            : "",
+        loading: false
+      });
     });
   };
 
@@ -45,11 +61,18 @@ class EditorPage extends React.Component<Props> {
     this.setState({ body: value });
   };
 
-  handleArticleSubmit = async () => {
-    const { title, body } = this.state;
-    const postBody: NewArticle = { title, body: { content: body } };
-    postArticle(postBody);
-    this.props.history.push("/home");
+  handleArticleUpdate = async () => {
+    const {
+      match: {
+        params: { articleId }
+      }
+    } = this.props;
+    const { title, body, article } = this.state;
+    const id = article ? article.id : null;
+    if (!id) return;
+    const postBody: Article = { id, title, body: { content: body } };
+    updateArticle(postBody);
+    this.props.history.push(`/view/${articleId}`);
   };
 
   render() {
@@ -58,7 +81,7 @@ class EditorPage extends React.Component<Props> {
     return (
       <>
         <div className="App">
-          <Header onSubmit={this.handleArticleSubmit} />
+          <Header onSubmit={this.handleArticleUpdate} />
         </div>
         <div className="container">
           <div className="row">
@@ -86,5 +109,3 @@ class EditorPage extends React.Component<Props> {
     );
   }
 }
-
-export default withRouter(EditorPage);

@@ -8,8 +8,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Markup } from "interweave";
 import { BootstrapTooltip, HtmlTooltip } from "./hocs/util";
-import { Article } from "./ArticlePage";
 import classNames from "classnames";
+import { Article } from "./types/articleTypes";
 
 interface Props {
   article?: Article;
@@ -87,7 +87,11 @@ export default class MainContentView extends React.Component<Props> {
             <p className="mt-2 MainContentView__lastEdited">
               Last edited: 02/14/2020
             </p>
-
+            {article.body ? (
+              <Markup content={article.body.content} />
+            ) : (
+              "Nothing here"
+            )}
             {/* <BootstrapTooltip
               title={
                 <>

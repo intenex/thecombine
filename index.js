@@ -24,16 +24,15 @@ const getAllArticles = (request, response) => {
 
 const postArticle = (request, response) => {
   const { title, body } = request.body;
+  // RETURNING * is how you get results returned fuck yeah
   pool.query(
-    "INSERT INTO articles (title, body) VALUES ($1, $2)",
+    "INSERT INTO articles (title, body) VALUES ($1, $2) RETURNING *",
     [title, body],
-    error => {
+    (error, results) => {
       if (error) {
         throw error;
       }
-      response
-        .status(201)
-        .json({ status: "success", message: "Article added." });
+      response.status(201).json(results.rows);
     }
   );
 };

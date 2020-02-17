@@ -4,12 +4,8 @@ import "./App.css";
 import Header from "./Header";
 import ListView from "./ListView";
 import MainContentView from "./MainContentView";
-
-export interface Article {
-  id: Number;
-  title: string;
-  body: { content: string };
-}
+import { getArticles } from "./functions/articleFunctions";
+import { Article } from "./types/articleTypes";
 
 type ArticleParams = { articleId: string };
 
@@ -18,33 +14,34 @@ interface Props extends RouteComponentProps<ArticleParams> {}
 interface State {
   articles: Article[];
   article?: Article;
+  loading: boolean;
 }
 
 export default class ArticlePage extends React.Component<Props, State> {
   state: State = {
-    articles: []
+    articles: [],
+    loading: false
   };
 
   componentDidMount() {
-    this.getArticles();
+    this.loadArticles();
   }
 
-  getArticles = async () => {
+  loadArticles = () => {
     const {
       match: { params }
     } = this.props;
-    const response = await fetch("/api/articles");
-    const articles: Article[] = await response.json();
-    let selectedArticle = undefined;
-    if (params && params.articleId) {
-      selectedArticle = articles.find(
+    this.setState({ loading: true });
+    getArticles().then(articles => {
+      const selectedArticle = articles.find(
         article => article.id === parseInt(params.articleId)
       );
-    }
-    this.setState({ articles, article: selectedArticle });
+      this.setState({ articles, article: selectedArticle, loading: false });
+    });
   };
 
   render() {
+    const { loading } = this.state;
     return (
       <>
         <Header />
@@ -53,7 +50,11 @@ export default class ArticlePage extends React.Component<Props, State> {
             <ListView articles={this.state.articles} />
           </div>
           <div className="col-8">
-            <MainContentView article={this.state.article} />
+            {loading ? (
+              <p>Loading...</p>
+            ) : (
+              <MainContentView article={this.state.article} />
+            )}
           </div>
           <div className="col-2"></div>
         </div>

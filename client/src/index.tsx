@@ -4,11 +4,13 @@ import "./style/index.scss";
 import ArticlePage from "./ArticlePage";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import EditorPage from "./EditorPage";
+import EditArticlePage from "./EditArticlePage";
 
 function App() {
   return (
     <div>
       <Switch>
+        <Route path="/view/:articleId/edit" component={EditArticlePage} />
         <Route path="/view/:articleId" component={ArticlePage} />
         <Route path="/editor">
           <EditorPage />
