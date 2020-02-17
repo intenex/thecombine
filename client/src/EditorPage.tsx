@@ -1,39 +1,23 @@
 import React from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import ReactQuill, { Quill } from "react-quill";
-import Interweave from "interweave";
 import "./App.css";
 import "react-quill/dist/quill.snow.css";
 import Header from "./Header";
-import { getArticles, postArticle } from "./functions/articleFunctions";
-import { Article, NewArticle } from "./types/articleTypes";
+import { postArticle } from "./functions/articleFunctions";
+import { NewArticle } from "./types/articleTypes";
 
 interface Props extends RouteComponentProps {}
 
 interface State {
-  articles: Article[];
   title: string;
   body: string;
-  loading: boolean;
 }
 
 class EditorPage extends React.Component<Props> {
   state: State = {
-    articles: [],
     title: "",
-    body: "",
-    loading: false
-  };
-
-  componentDidMount() {
-    this.loadArticles();
-  }
-
-  loadArticles = () => {
-    this.setState({ loading: true });
-    getArticles().then(articles => {
-      this.setState({ articles });
-    });
+    body: ""
   };
 
   handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,12 +32,12 @@ class EditorPage extends React.Component<Props> {
   handleArticleSubmit = async () => {
     const { title, body } = this.state;
     const postBody: NewArticle = { title, body: { content: body } };
-    postArticle(postBody);
-    this.props.history.push("/home");
+    const newArticle = await postArticle(postBody);
+    this.props.history.push(`/view/${newArticle.id}`);
   };
 
   render() {
-    const { articles, title, body } = this.state;
+    const { title, body } = this.state;
 
     return (
       <>

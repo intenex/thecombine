@@ -11,14 +11,16 @@ type OptionalArticleParams = { articleId?: string };
 class Header extends React.Component<Props> {
   handleDelete = async () => {
     const {
-      match: { params }
+      match: {
+        params: { articleId }
+      }
     } = this.props;
-    if (params.articleId) {
-      const response = await fetch(`/api/articles/${params.articleId}`, {
+    if (articleId) {
+      const response = await fetch(`/api/articles/${articleId}`, {
         method: "DELETE"
       });
       const parsedResponse = await response.json();
-      console.log(parsedResponse);
+      return parsedResponse;
     }
   };
 

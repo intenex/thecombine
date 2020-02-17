@@ -12,8 +12,9 @@ export const postArticle = async (postBody: NewArticle) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(postBody)
   });
-  const responseJSON = await response.json();
-  return responseJSON;
+  const newArticle: Article = await response.json();
+  console.log(newArticle);
+  return newArticle;
 };
 
 export const updateArticle = async (postBody: Article) => {

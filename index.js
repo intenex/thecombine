@@ -24,7 +24,7 @@ const getAllArticles = (request, response) => {
 
 const postArticle = (request, response) => {
   const { title, body } = request.body;
-  // RETURNING * is how you get results returned fuck yeah
+  // RETURNING * is how you get results returned fuck yeah as per https://github.com/brianc/node-postgres/issues/1269
   pool.query(
     "INSERT INTO articles (title, body) VALUES ($1, $2) RETURNING *",
     [title, body],
@@ -32,7 +32,7 @@ const postArticle = (request, response) => {
       if (error) {
         throw error;
       }
-      response.status(201).json(results.rows);
+      response.status(201).json(results.rows[0]);
     }
   );
 };
@@ -44,7 +44,14 @@ const getArticle = (request, response) => {
     if (error) {
       throw error;
     }
-    response.status(200).json(results.rows);
+    if (results.rows.length === 1) {
+      response.status(200).json(results.rows[0]);
+    } else {
+      response.status(204).json({
+        status: "no content",
+        message: `No article with ID ${id} was found.`
+      });
+    }
   });
 };
 
